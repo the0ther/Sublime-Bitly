@@ -1,6 +1,7 @@
 import urllib
 import urllib2
 import threading
+import sublime
 
 class BitlyApiCall(threading.Thread):
 	def __init__(self, sel, string, timeout):
@@ -10,14 +11,18 @@ class BitlyApiCall(threading.Thread):
 		self.result = None
 		threading.Thread.__init__(self)
 
-		# the0ther
-		# R_fa589cfdddea41f62a78e21f6e63677f
 	def run(self):
+		login = 'the0ther'
+		key = 'R_fa589cfdddea41f62a78e21f6e63677f'
 		try:
-			data = urllib.urlencode({'longUrl': self.original})
-			request = urllib2.Request('http://bit.ly/v3/shorten', data, headers={"User-Agent": "Sublime Bitly"})
+			encUrl = urllib.urlencode({"longUrl": self.original})
+			# reqUrl = 'https://ssl-api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
+			reqUrl = 'http://api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
+			print reqUrl
+			request = urllib2.Request(reqUrl)
 			http_file = urllib2.urlopen(request, timeout=self.timeout)
 			self.result = http_file.read()
+			print self.result
 			return
 
 		except (urllib2.HTTPError) as (e):
