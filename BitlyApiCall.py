@@ -19,7 +19,7 @@ class BitlyApiCall(threading.Thread):
 			# reqUrl = 'https://ssl-api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
 			reqUrl = 'http://api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
 			print reqUrl
-			request = urllib2.Request(reqUrl)
+			request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Prefixr"})
 			http_file = urllib2.urlopen(request, timeout=self.timeout)
 			self.result = http_file.read()
 			print self.result
