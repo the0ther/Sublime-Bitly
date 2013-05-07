@@ -1,28 +1,18 @@
+# This Python file uses the following encoding: utf-8
+# -*- coding: utf-8 -*-
 import sublime
 import sublime_plugin
-import re
+import urlparse
 
 class BitlyShortenCommand(sublime_plugin.TextCommand):
-    def run(self, edit):
-    		# regex search for URLs:
-    		urls = self.view.find_all('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
-    		print urls
-
-        # We check for braces since we can do a better job of preserving
-        # whitespace when braces are not present
-        # braces = False
-        # sels = self.view.sel()
-        # for sel in sels:
-        #     if self.view.substr(sel).find('{') != -1:
-        #         braces = True
-
-        # Expand selection to braces, unfortunately this can't use the
-        # built in move_to brackets since that matches parentheses also
-        # if not braces:
-        #     new_sels = []
-        #     for sel in sels:
-        #         new_sels.append(self.view.find('\}', sel.end()))
-        #     sels.clear()
-        #     for sel in new_sels:
-        #         sels.add(sel)
-        #     self.view.run_command("expand_selection", {"to": "brackets"})
+	def run(self, edit):
+		# regex search for URLs:
+		# urls = urlparse.parseurl(self.view.find_all(u'((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:ww‌​w.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?‌​(?:[\w]*))?)'))
+		# urls = self.view.find_all("#(?i)\b((?:[a-z][\w-]+:(?:/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))#iS")
+		# urls = self.view.find_all('@(https?|ftp)://(-\.)?([^\s/?\.#-]+\.?)+(/[^\s]*)?$@iS')
+		urls = self.view.find_all(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^%s\s]|/)))')
+		print urls
+    # threads = []
+		for url in urls:
+			print url
+			# print self.view.substr(url)
