@@ -2,6 +2,7 @@ import urllib
 import urllib2
 import threading
 import sublime
+import json
 
 class BitlyApiCall(threading.Thread):
 	def __init__(self, sel, string, timeout):
@@ -18,10 +19,11 @@ class BitlyApiCall(threading.Thread):
 			encUrl = urllib.urlencode({"longUrl": self.original})
 			# reqUrl = 'https://ssl-api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
 			reqUrl = 'http://api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
-			print reqUrl
 			request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Prefixr"})
 			http_file = urllib2.urlopen(request, timeout=self.timeout)
-			self.result = http_file.read()
+			bitlyRes = http_file.read()
+			bitlyObj = json.loads(bitlyRes)
+			self.result = bitlyObj['data']['url']
 			print self.result
 			return
 
