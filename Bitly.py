@@ -63,25 +63,28 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
 		sel = thread.sel
 		original = thread.original
 		result = thread.result
+		print result
 
-		bitlyObj = json.loads(result)
-		print bitlyObj['data']['url']
-		bitlyUrl = bitlyObj['data']['url']
+		# bitlyObj = json.loads(result)
+		# print bitlyObj['data']['url']
+		# bitlyUrl = bitlyObj['data']['url']
 
 		# Here we adjust each selection for any text we have already inserted
 		if offset:
 			sel = sublime.Region(sel.begin() + offset, sel.end() + offset)
 
-		result = self.normalize_line_endings(bitlyUrl)
-		(prefix, main, suffix) = self.fix_whitespace(original, bitlyUrl, sel)
+		# result = self.normalize_line_endings(result)
+		# (prefix, main, suffix) = self.fix_whitespace(original, result, sel)
 		#self.view.replace(edit, sel, prefix + main + suffix)
-		self.view.replace(edit, sel, prefix + main + suffix)
+		# self.view.replace(edit, sel, prefix + main + suffix)
+		self.view.replace(edit, sel, result)
 
 		# We add the end of the new text to the selection
 		# end_point = sel.begin() + len(prefix) + len(main)
 		# self.view.sel().add(sublime.Region(end_point, end_point))
 
-		return offset + len(prefix + main + suffix) - len(original)
+		# return offset + len(prefix + main + suffix) - len(original)
+		return offset + 1
 
 	def normalize_line_endings(self, string):
 		string = string.replace('\r\n', '\n').replace('\r', '\n')

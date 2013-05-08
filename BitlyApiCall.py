@@ -7,6 +7,8 @@ import json
 class BitlyApiCall(threading.Thread):
 	def __init__(self, sel, string, timeout):
 		self.sel = sel
+		print 'sel is: '
+		print sel
 		self.original = string
 		self.timeout = timeout
 		self.result = None
@@ -24,7 +26,7 @@ class BitlyApiCall(threading.Thread):
 			bitlyRes = http_file.read()
 			bitlyObj = json.loads(bitlyRes)
 			self.result = bitlyObj['data']['url']
-			print self.result
+			# print self.result
 			return
 
 		except (urllib2.HTTPError) as (e):
