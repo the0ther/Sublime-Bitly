@@ -3,6 +3,7 @@
 import sublime
 import sublime_plugin
 import re
+import json
 from BitlyApiCall import BitlyApiCall
 
 class BitlyShortenCommand(sublime_plugin.TextCommand):
@@ -63,6 +64,9 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
 		original = thread.original
 		result = thread.result
 
+		bitlyObj = json.loads(result)
+		print bitlyObj['data']['url']
+
 		# Here we adjust each selection for any text we have already inserted
 		if offset:
 			sel = sublime.Region(sel.begin() + offset, sel.end() + offset)
@@ -115,3 +119,12 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
 		suffix = match.groups()[0]
 
 		return (prefix, prefixed, suffix)
+
+
+# class BitlyResponse(object):
+# 	def __init__(self, long_url, url, hash, global_hash, new_hash):
+# 		self.long_url = long_url
+# 		self.url = url
+# 		self.hash = hash
+# 		self.global_hash = global_hash
+# 		self.new_hash = new_hash
