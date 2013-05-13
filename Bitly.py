@@ -10,6 +10,7 @@ from BitlyApiCall import BitlyApiCall
 class BitlyShortenCommand(sublime_plugin.TextCommand):
   def run(self, edit):
     # replace with regex from here: http://stackoverflow.com/questions/1986059/grubers-url-regular-expression-in-python
+    # here is the full explanation of this regex: http://alanstorm.com/url_regex_explained
     self.urls = self.view.find_all(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^%s\s]|/)))')
     threads = []
     for url in self.urls:
