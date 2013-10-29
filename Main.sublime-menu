@@ -1,9 +1,9 @@
 [  
 {  
-    "id": "Tools",  
+    "id": "tools",  
     "children":  
     [  
-        {"id": "wrap"},  
+        {"id": "Packages"},
         { "command": "bitly_shorten" }  
     ]  
 }  
