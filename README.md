@@ -1,6 +1,6 @@
 # Bitly Sublime Plugin
 
-Started off with using code from (this demo)[http://bit.ly/HdTSyK]
+Started off with using code from [this demo](http://bit.ly/HdTSyK)
 
 ## Todos
 
