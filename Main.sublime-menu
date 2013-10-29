@@ -1,0 +1,10 @@
+[  
+{  
+    "id": "Tools",  
+    "children":  
+    [  
+        {"id": "wrap"},  
+        { "command": "bitly_shorten" }  
+    ]  
+}  
+]  
