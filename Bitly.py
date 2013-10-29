@@ -9,34 +9,30 @@ from BitlyApiCall import BitlyApiCall
 
 class BitlyShortenCommand(sublime_plugin.TextCommand):
   def run(self, edit):
+    # print "inside run"
+
     # replace with regex from here: http://stackoverflow.com/questions/1986059/grubers-url-regular-expression-in-python
     # here is the full explanation of this regex: http://alanstorm.com/url_regex_explained
-
     # Using now:
-
     # \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^%s\s]|/)))
-
-
     # Original Gruber:
-
     # \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))
-
-
 
     # Best try in Python:
 
     # 1. \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]|/)))
-
     # 2. \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[-!\"#$%&\'()*+,./:;<=>?@\\[\\\\]^_`{|}~]\s]|/)))
-
     # 3. \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^\s]|/)))
 
     # str = re.findall(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[-!\"#$%&\'()*+,./:;<=>?@\\[\\\\]^_`{|}~]\s]|/)))', 'http://example.com/this/path/1?asdf=qwer&qwer=asdf')
 
     self.urls = self.view.find_all(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^\s]|/)))')
+    # print self.urls
     threads = []
     for url in self.urls:
+      # print url
       string = self.view.substr(url)
+      # print string
       thread = BitlyApiCall(url, string, 15)
       threads.append(thread)
       thread.start()

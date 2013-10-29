@@ -24,7 +24,7 @@ class BitlyApiCall(threading.Thread):
       bitlyRes = http_file.read()
       bitlyObj = json.loads(bitlyRes)
       self.result = bitlyObj['data']['url']
-      # print self.result
+      # print "bitly encoded url: " + self.result
       return
 
     except (urllib2.HTTPError) as (e):
