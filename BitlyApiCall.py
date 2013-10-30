@@ -5,21 +5,23 @@ import sublime
 import json
 
 class BitlyApiCall(threading.Thread):
-  def __init__(self, sel, string, timeout):
+  def __init__(self, sel, string, timeout, user, key):
     self.sel = sel
     self.original = string
     self.timeout = timeout
     self.result = None
+    self.user = user
+    self.key = key
     threading.Thread.__init__(self)
 
   def run(self):
-    login = 'the0ther'
-    key = 'R_fa589cfdddea41f62a78e21f6e63677f'
+    login = self.user
+    key = self.key
     try:
       encUrl = urllib.urlencode({"longUrl": self.original})
       # reqUrl = 'https://ssl-api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
       reqUrl = 'http://api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
-      request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Prefixr"})
+      request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Bitly"})
       http_file = urllib2.urlopen(request, timeout=self.timeout)
       bitlyRes = http_file.read()
       bitlyObj = json.loads(bitlyRes)
