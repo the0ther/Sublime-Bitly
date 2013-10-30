@@ -1,9 +1,11 @@
-# This Python file uses the following encoding: utf-8
-# -*- coding: utf-8 -*-
 import sublime
 import sublime_plugin
 import re
 import json
+import urlparse
+
+
+
 from BitlyApiCall import BitlyApiCall
 
 
@@ -23,17 +25,27 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
     # 1. \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]|/)))
     # 2. \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[-!\"#$%&\'()*+,./:;<=>?@\\[\\\\]^_`{|}~]\s]|/)))
     # 3. \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^\s]|/)))
+    # 4. Jeff Atwoods \(?\bhttp://[-A-Za-z0-9+&@#/%?=~_()|!:,.;]*[-A-Za-z0-9+&@#/%=~_()|]
+    #     This also has a parens cleanup routine at the end of it
 
     # str = re.findall(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[-!\"#$%&\'()*+,./:;<=>?@\\[\\\\]^_`{|}~]\s]|/)))', 'http://example.com/this/path/1?asdf=qwer&qwer=asdf')
 
-    self.urls = self.view.find_all(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^\s]|/)))')
+    self.settings = sublime.load_settings("Bitly.sublime-settings")
+
+    self.urls = self.view.find_all(r'\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^\s]|/)))\b')
     # print self.urls
     threads = []
     for url in self.urls:
       # print url
       string = self.view.substr(url)
-      # print string
-      thread = BitlyApiCall(url, string, 15)
+      string = self.strip_parens(string)
+
+      # print "string stripped: " + string
+
+      # print self.settings.get("api_login")
+      # print "user " + str(self.view.settings().get("api_login"))
+
+      thread = BitlyApiCall(url, string, 15, self.settings.get("api_login"), self.settings.get("api_key"))
       threads.append(thread)
       thread.start()
 
@@ -86,3 +98,13 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
 
     # We add the end of the new text to the selection
     return offset + len(result) - len(original)
+
+  def strip_parens(self, strUrl):
+    asStr = str(strUrl)
+    # print asStr
+    # return asStr    
+    if asStr[-1] == ")":
+      # print "found parens"
+      return asStr[0:len(asStr)-1]
+    else:
+      return asStr
