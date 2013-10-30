@@ -13,13 +13,13 @@ class BitlyApiCall(threading.Thread):
     threading.Thread.__init__(self)
 
   def run(self):
-    login = 'the0ther'
-    key = 'R_fa589cfdddea41f62a78e21f6e63677f'
+    login = self.view.settings("api_login").get
+    key = self.view.settings("api_key").get
     try:
       encUrl = urllib.urlencode({"longUrl": self.original})
       # reqUrl = 'https://ssl-api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
       reqUrl = 'http://api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
-      request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Prefixr"})
+      request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Bitly"})
       http_file = urllib2.urlopen(request, timeout=self.timeout)
       bitlyRes = http_file.read()
       bitlyObj = json.loads(bitlyRes)
