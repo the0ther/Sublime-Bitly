@@ -6,7 +6,8 @@ import json
 import logging as logger
 
 class BitlyExpand(threading.Thread):
-  def __init__(self, string, timeout, user, key):
+  def __init__(self, sel, string, timeout, user, key):
+    self.sel = sel
     self.original = string
     self.timeout = timeout
     self.result = None
@@ -27,7 +28,7 @@ class BitlyExpand(threading.Thread):
       bitlyObj = json.loads(bitlyRes)
       # print bitlyObj
       self.result = bitlyObj['data']['expand'][0]['long_url']
-      print self.result
+      # print self.result
       # print self.result[0]['long_url']
       return
     except (urllib2.HTTPError) as (e):

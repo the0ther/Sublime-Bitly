@@ -53,7 +53,7 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
         continue
       if thread.result == False:
         continue
-      # offset = self.replace(edit, thread, offset)
+      offset = self.replace(edit, thread, offset)
 
     threads = next_threads
 
@@ -114,7 +114,7 @@ class BitlyExpandCommand(sublime_plugin.WindowCommand):
       # print selection
       string = self.view.substr(selection)
       # print string
-      thread = BitlyExpand(string, 15, self.settings.get("api_login"), self.settings.get("api_key"))
+      thread = BitlyExpand(selection, string, 15, self.settings.get("api_login"), self.settings.get("api_key"))
       threads.append(thread)
       thread.start()
     edit = self.view.begin_edit('bitly')
@@ -128,7 +128,7 @@ class BitlyExpandCommand(sublime_plugin.WindowCommand):
         continue
       if thread.result == False:
         continue
-      # offset = self.replace(edit, thread, offset)
+      offset = self.replace(edit, thread, offset)
     threads = next_threads
 
     if len(threads):
@@ -151,17 +151,20 @@ class BitlyExpandCommand(sublime_plugin.WindowCommand):
     matches = len(self.selections)
     sublime.status_message('Bitly successfully run on %s selection%s' % (matches, '' if matches == 1 else 's'))
 
-  # def replace(self, edit, thread, offset):
-  #   sel = thread.sel
-  #   original = thread.original
-  #   result = thread.result
+  def replace(self, edit, thread, offset):
+    # print thread.sel
+    sel = thread.sel
+    original = thread.original
+    print "original: " + original
+    result = thread.result
+    print "result: " + result
 
-  #   # Here we adjust each selection for any text we have already inserted
-  #   if offset:
-  #     # print 'offset: %s' % offset
-  #     sel = sublime.Region(sel.begin() + offset, sel.end() + offset)
+    # Here we adjust each selection for any text we have already inserted
+    if offset:
+      print 'offset: %s' % offset
+      sel = sublime.Region(sel.begin() + offset, sel.end() + offset)
 
-  #   # self.view.replace(edit, sel, result)
+    self.view.replace(edit, sel, result)
 
-  #   # We add the end of the new text to the selection
-  #   return offset + len(result) - len(original)
+    # We add the end of the new text to the selection
+    return offset + len(result) - len(original)
