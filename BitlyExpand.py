@@ -3,32 +3,29 @@ import urllib2
 import threading
 import sublime
 import json
+import logging as logger
 
-class BitlyApiCall(threading.Thread):
+class BitlyExpand(threading.Thread):
   def __init__(self, sel, string, timeout, user, key):
     self.sel = sel
     self.original = string
     self.timeout = timeout
     self.result = None
-    self.user = user || "the0ther"
-    self.key = key || "R_fa589cfdddea41f62a78e21f6e63677f"
+    self.user = user or "the0ther"
+    self.key = key or "R_fa589cfdddea41f62a78e21f6e63677f"
     threading.Thread.__init__(self)
 
   def run(self):
-    login = self.user
-    key = self.key
     try:
-      encUrl = urllib.urlencode({"longUrl": self.original})
-      # reqUrl = 'https://ssl-api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
-      reqUrl = 'http://api.bitly.com/v3/shorten?login=' + login + '&apiKey=' + key + '&' + encUrl
+      encUrl = urllib.urlencode({"shortUrl": self.original})
+      reqUrl = 'http://api.bitly.com/v3/expand?login=' + self.user + '&apiKey=' + self.key + '&' + encUrl
       request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Bitly"})
       http_file = urllib2.urlopen(request, timeout=self.timeout)
       bitlyRes = http_file.read()
       bitlyObj = json.loads(bitlyRes)
-      self.result = bitlyObj['data']['url']
-      # print "bitly encoded url: " + self.result
+      self.result = bitlyObj['data']['long_url']
+      logger.debug("bitly encoded url: " + self.result)
       return
-
     except (urllib2.HTTPError) as (e):
       err = '%s: HTTP error %s contacting API' % (__name__, str(e.code))
     except (urllib2.URLError) as (e):
