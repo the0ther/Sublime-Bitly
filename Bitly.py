@@ -4,17 +4,18 @@ import re
 import json
 import urlparse
 
-
-
 from BitlyApiCall import BitlyApiCall
 
+# The inspiration for this is the following Textmate plugin:
+# http://bit.ly/18MdHDI
 
+# This shortens URLs using the bit.ly service
 class BitlyShortenCommand(sublime_plugin.TextCommand):
   def run(self, edit):
     # print "inside run"
 
-    # replace with regex from here: http://stackoverflow.com/questions/1986059/grubers-url-regular-expression-in-python
-    # here is the full explanation of this regex: http://alanstorm.com/url_regex_explained
+    # replace with regex from here: http://bit.ly/18siBsM
+    # here is the full explanation of this regex: http://bit.ly/HdQl3F
     # Using now:
     # \b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^%s\s]|/)))
     # Original Gruber:
@@ -108,3 +109,8 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
       return asStr[0:len(asStr)-1]
     else:
       return asStr
+
+# This expands a bitly URL
+class BitlyExpandCommand(sublime_plugin.TextCommand):
+  def run(self, edit):
+    return true
