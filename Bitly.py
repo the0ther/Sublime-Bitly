@@ -36,9 +36,6 @@ class BitlyShortenCommand(sublime_plugin.TextCommand):
       logger.debug(url)
       string = self.view.substr(url)
       string = self.strip_parens(string)
-      # logger.debug("string stripped: " + string)
-      # logger.debug(self.settings.get("api_login"))
-      # logger.debug("user " + str(self.view.settings().get("api_login")))
       thread = BitlyShorten(url, string, 15, self.settings.get("api_login"), self.settings.get("api_key"))
       threads.append(thread)
       thread.start()
@@ -155,13 +152,16 @@ class BitlyExpandCommand(sublime_plugin.WindowCommand):
     # print thread.sel
     sel = thread.sel
     original = thread.original
-    print "original: " + original
+    # print "original: " + original
+    logger.debug("original: " + original)
     result = thread.result
-    print "result: " + result
+    # print "result: " + result
+    logger.debug("result: " + result)
 
     # Here we adjust each selection for any text we have already inserted
     if offset:
-      print 'offset: %s' % offset
+      # print 'offset: %s' % offset
+      logger.debug('offset: %s' % offset)
       sel = sublime.Region(sel.begin() + offset, sel.end() + offset)
 
     self.view.replace(edit, sel, result)

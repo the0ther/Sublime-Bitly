@@ -11,8 +11,8 @@ class BitlyExpand(threading.Thread):
     self.original = string
     self.timeout = timeout
     self.result = None
-    self.user = user or "the0ther"
-    self.key = key or "R_fa589cfdddea41f62a78e21f6e63677f"
+    self.user = user or "bitlysublime"
+    self.key = key or "R_ade2ddc55669904d7a5f1f1459645a3c"
     threading.Thread.__init__(self)
 
   def run(self):
