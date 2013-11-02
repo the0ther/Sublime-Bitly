@@ -10,7 +10,7 @@ class BitlyExpand(threading.Thread):
     self.original = string
     self.timeout = timeout
     self.result = None
-    self.user = user or "the0ther"
+    self.user = user or "bitlysublime"
     self.key = key or "R_fa589cfdddea41f62a78e21f6e63677f"
     threading.Thread.__init__(self)
 
@@ -27,7 +27,7 @@ class BitlyExpand(threading.Thread):
       bitlyObj = json.loads(bitlyRes)
       # print bitlyObj
       self.result = bitlyObj['data']['expand'][0]['long_url']
-      print self.result
+      logger.debug(self.result)
       # print self.result[0]['long_url']
       return
     except (urllib2.HTTPError) as (e):
