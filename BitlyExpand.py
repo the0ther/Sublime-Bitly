@@ -7,7 +7,7 @@ import logging as logger
 
 class BitlyExpand(threading.Thread):
   def __init__(self, string, timeout, user, key):
-    self.sel = sel
+    # self.sel = sel
     self.original = string
     self.timeout = timeout
     self.result = None
@@ -19,13 +19,13 @@ class BitlyExpand(threading.Thread):
     try:
       encUrl = urllib.urlencode({"shortUrl": self.original})
       # print encUrl
-      reqUrl = 'http://api.bitly.com/v3/expand?login=' + self.user + '&apiKey=' + self.key + '&' + encUrl
+      reqUrl = 'http://api.bitly.com/v3/expand?login=' + self.user + '&apiKey=' + self.key + '&shortUrl=' + encUrl
       print "reqUrl: " + reqUrl
-      request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Bitly"})
-      http_file = urllib2.urlopen(request, timeout=self.timeout)
-      bitlyRes = http_file.read()
-      bitlyObj = json.loads(bitlyRes)
-      print bitlyObj
+      # request = urllib2.Request(reqUrl, headers={"User-Agent": "Sublime Bitly"})
+      # http_file = urllib2.urlopen(request, timeout=self.timeout)
+      # bitlyRes = http_file.read()
+      # bitlyObj = json.loads(bitlyRes)
+      # print bitlyObj
       # self.result = bitlyObj['data']['long_url']
       # print "bitly encoded url: " + self.result
       return

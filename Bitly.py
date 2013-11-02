@@ -111,10 +111,10 @@ class BitlyExpandCommand(sublime_plugin.WindowCommand):
     threads = []
 
     for selection in self.selections:
-      print selection
+      # print selection
       string = self.view.substr(selection)
       print string
-      thread = BitlyExpand(selection, string, 15, self.settings.get("api_login"), self.settings.get("api_key"))
+      thread = BitlyExpand(string, 15, self.settings.get("api_login"), self.settings.get("api_key"))
       threads.append(thread)
       thread.start()
     edit = self.view.begin_edit('bitly')
