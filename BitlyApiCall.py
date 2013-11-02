@@ -10,8 +10,8 @@ class BitlyApiCall(threading.Thread):
     self.original = string
     self.timeout = timeout
     self.result = None
-    self.user = user
-    self.key = key
+    self.user = user || "the0ther"
+    self.key = key || "R_fa589cfdddea41f62a78e21f6e63677f"
     threading.Thread.__init__(self)
 
   def run(self):
