@@ -1,10 +1,29 @@
-# Bitly Sublime Plugin
+# Bit.ly Sublime Plugin
 
-Started off with using code from [this demo](http://bit.ly/HdTSyK).
+Hello, this is a small plugin I've put together based on [a demo I found on the web](http://bit.ly/HdTSyK).
+
+I find the URL-shortening service [Bit.ly](http://bitly.com) to be quite handy. Short URLs are aesthetically pleasing, to be sure. The thing I really like about Bit.ly though are the reports I can get about shortened links I've sent others.
+
+_This is an early release._
+
+## Usage
+
+## Settings
+
+The only settings for this plugin are account-related. You can use this plugin with your own account by using the following settings:
+
+```
+{
+	"api_login": "<YOUR_BITLY_USERNAME_HERE>",
+	"api_key": "<YOUR_API_KEY_HERE>"
+}
+```
+
+To get a new API key from Bit.ly [visit this link](https://bitly.com/a/your_api_key).
 
 ## Todos
 
-* Add instructions for obtaining API from bitly.
+* Add instructions for obtaining API from Bit.ly.
 * Add in contextual menu, so you can choose 1 URL to shorten
 
 ## Issues
