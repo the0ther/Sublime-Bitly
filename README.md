@@ -6,8 +6,6 @@ I find the URL-shortening service [Bit.ly](http://bitly.com) to be quite handy. 
 
 _This is an early release._
 
-## Usage
-
 ## Settings
 
 The only settings for this plugin are account-related. You can use this plugin with your own account by using the following settings:
