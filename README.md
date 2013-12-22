@@ -1,6 +1,6 @@
 # Bit.ly Sublime Plugin
 
-Hello, this is a small plugin I've put together based on [a demo I found on the web](http://bit.ly/HdTSyK).
+Hello, this is a small plugin I've put together based on [a demo I found on the web at Nettuts+](http://bit.ly/HdS3BQ).
 
 I find the URL-shortening service [Bit.ly](http://bitly.com) to be quite handy. Short URLs are aesthetically pleasing, to be sure. The thing I really like about Bit.ly though are the reports I can get about shortened links I've sent others.
 
