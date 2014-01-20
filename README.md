@@ -28,3 +28,4 @@ To get a new API key from Bit.ly [visit this link](https://bitly.com/a/your_api_
 
 1. Needs tests
 2. The regular expression used to detect URLs is not well-tested.
+3. May change so it ensures no spaces in the highlighted string, as a safety precaution. As it works now a user may select a large string with spaces and this has unpredictable behavior. At least test out what happens and perhaps update the code to prevent it, if that is not already happening.
