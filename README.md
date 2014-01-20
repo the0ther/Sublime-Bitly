@@ -17,11 +17,11 @@ The only settings for this plugin are account-related. You can use this plugin w
 }
 ```
 
-To get a new API key from Bit.ly [visit this link](https://bitly.com/a/your_api_key).
+To get a new API key from Bit.ly [visit this link](https://bitly.com/a/your_api_key). 
 
 ## Todos
 
-* Add instructions for obtaining API from Bit.ly.
+* ~~Add instructions for obtaining API from Bit.ly~~
 * Add in contextual menu, so you can choose 1 URL to shorten
 
 ## Issues
