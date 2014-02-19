@@ -23,6 +23,7 @@ To get a new API key from Bit.ly [visit this link](https://bitly.com/a/your_api_
 
 * ~~Add instructions for obtaining API from Bit.ly~~
 * Add in contextual menu, so you can choose 1 URL to shorten
+* Check config, provide user feedback if the user provides invalid username/api-key
 
 ## Issues
 
