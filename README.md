@@ -6,6 +6,8 @@ I find the URL-shortening service [Bit.ly](http://bitly.com) to be quite handy. 
 
 _This is an early release._
 
+Contributions are welcome, there are some bugs I'm quite sure. A little short on time here…aren't we all?
+
 ## Settings
 
 The only settings for this plugin are account-related. You can use this plugin with your own account by using the following settings:
@@ -23,6 +25,11 @@ To get a new API key from Bit.ly [visit this link](https://bitly.com/a/your_api_
 
 * ~~Add instructions for obtaining API from Bit.ly~~
 * Add in contextual menu, so you can choose 1 URL to shorten
+* Check config, provide user feedback if the user provides invalid username/api-key
+* New Features
+	* "Shorten all Markdown formatted links"
+* Rebrand/Rename this as a tool to "Monitor Links", the way I use it to verify if people bother to look at links I've put into a document.
+
 
 ## Issues
 
